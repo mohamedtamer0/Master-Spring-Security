@@ -1,10 +1,10 @@
-package com.tamer.springsecurity6;
+package com.tamer.BankBackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Springsecurity6ApplicationTests {
+class BankBackendApplicationTests {
 
 	@Test
 	void contextLoads() {

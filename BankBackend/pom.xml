@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tamer</groupId>
-	<artifactId>springsecurity6</artifactId>
+	<artifactId>BankBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>springsecurity6</name>
+	<name>BankBackend</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
