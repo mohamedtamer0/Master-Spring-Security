@@ -32,7 +32,7 @@ public class ProjectSecurityConfig {
         return http.build();
     }
 
-    
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
