@@ -15,15 +15,13 @@ import org.springframework.security.web.authentication.password.HaveIBeenPwnedRe
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
-@Profile("!prod")
-public class ProjectSecurityConfig {
+@Profile("prod")
+public class ProjectSecurityProdConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        /*http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());*/
-        /*http.authorizeHttpRequests((requests) -> requests.anyRequest().denyAll());*/
-        http.sessionManagement(smc -> smc.invalidSessionUrl("/invalidSession").maximumSessions(3).maxSessionsPreventsLogin(true))
-                .requiresChannel(rcc -> rcc.anyRequest().requiresInsecure()) // Only HTTP
+        http.sessionManagement(smc -> smc.invalidSessionUrl("/invalidSession").maximumSessions(1).maxSessionsPreventsLogin(true))
+                .requiresChannel(rcc -> rcc.anyRequest().requiresSecure()) // Only HTTPS
                 .csrf(csrfConfig -> csrfConfig.disable())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
@@ -34,20 +32,6 @@ public class ProjectSecurityConfig {
         return http.build();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.withUsername("user").password("{noop}mohamedtamer@12345").authorities("read").build();
-//        UserDetails admin = User.withUsername("admin")
-//                .password("{bcrypt}$2a$12$sBXELV.53SiNSvame1M6NOHV9PxF1xbpkap0RHljM0WNH9QC5I8h2").authorities("admin").build();
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
-
-//    @Bean
-//    public UserDetailsService userDetailsService(DataSource dataSource) {
-//        return new JdbcUserDetailsManager(dataSource);
-//    }
-
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -55,7 +39,6 @@ public class ProjectSecurityConfig {
 
     /**
      * From Spring Security 6.3 version
-     *
      * @return
      */
     @Bean
