@@ -34,7 +34,7 @@ public class ProjectSecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withUsername("user").password("{noop}mohamedtamer@12345").authorities("read").build();
         UserDetails admin = User.withUsername("admin")
-                .password("{noop}$2a$12$sBXELV.53SiNSvame1M6NOHV9PxF1xbpkap0RHljM0WNH9QC5I8h2").authorities("admin").build();
+                .password("{bcrypt}$2a$12$sBXELV.53SiNSvame1M6NOHV9PxF1xbpkap0RHljM0WNH9QC5I8h2").authorities("admin").build();
         return new InMemoryUserDetailsManager(user, admin);
     }
 
