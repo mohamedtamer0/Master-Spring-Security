@@ -3,7 +3,10 @@ package com.tamer.BankBackend.config;
 
 import com.tamer.BankBackend.exceptionhandling.CustomAccessDeniedHandler;
 import com.tamer.BankBackend.exceptionhandling.CustomBasicAuthenticationEntryPoint;
+import com.tamer.BankBackend.filter.AuthoritiesLoggingAfterFilter;
+import com.tamer.BankBackend.filter.AuthoritiesLoggingAtFilter;
 import com.tamer.BankBackend.filter.CsrfCookieFilter;
+import com.tamer.BankBackend.filter.RequestValidationBeforeFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,12 +53,11 @@ public class ProjectSecurityConfig {
                         .ignoringRequestMatchers( "/contact","/register")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+                .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 .requiresChannel(rcc -> rcc.anyRequest().requiresInsecure()) // Only HTTP
                 .authorizeHttpRequests((requests) -> requests
-                        /*.requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
-                        .requestMatchers("/myBalance").hasAnyAuthority("VIEWBALANCE", "VIEWACCOUNT")
-                        .requestMatchers("/myLoans").hasAuthority("VIEWLOANS")
-                        .requestMatchers("/myCards").hasAuthority("VIEWCARDS")*/
                         .requestMatchers("/myAccount").hasRole("USER")
                         .requestMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/myLoans").hasRole("USER")
