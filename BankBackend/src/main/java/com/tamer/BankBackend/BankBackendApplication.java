@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 //@ComponentScan("com.tamer.BankBackend.controller.WelcomeController")
 //@EnableJpaRepositories("com.tamer.repository")
 //@EntityScan("com.tamer.model")
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class BankBackendApplication {
 
 	public static void main(String[] args) {
