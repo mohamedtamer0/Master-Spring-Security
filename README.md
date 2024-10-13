@@ -1,5 +1,13 @@
 # Master-Spring-Security
 
+This project is designed to help you understand the Spring Security architecture, focusing on the key packages, interfaces, and classes that handle authentication and authorization in web applications. It also covers essential security topics such as CORS, CSRF, JWT, OAuth2, password management, method-level security, and managing users, roles, and authorities.
+
+## Features
+Authentication & Authorization: Manage and control access within your application.
+Security Features: Includes CORS, CSRF protection, and JWT for stateless authentication.
+OAuth2 Integration: Support for social login and other OAuth2-based authentications.
+Method-Level Security: Secure specific methods using annotations like @Secured and @PreAuthorize.
+User & Role Management: Comprehensive tools for managing users, roles, and authorities.
 
 ## Getting Started
 
@@ -8,7 +16,7 @@
 - JDK 17 or higher
 - Maven
 - Git
-- Oracle 11g database (for file storage)
+- MySQL
 
 ### Installation
 
@@ -29,6 +37,11 @@
     ```bash
     mvn clean install
     ```
+**To create a MySQL DB container :**
+
+```bash
+docker run -p 3306:3306 --name springsecurity -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=bankbackend -d mysql
+```
 
 4. **Configure your `application.properties` file to connect to your Oracle 11g database:**
 
