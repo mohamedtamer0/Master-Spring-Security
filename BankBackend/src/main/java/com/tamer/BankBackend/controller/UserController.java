@@ -26,7 +26,6 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 @RestController
 @RequiredArgsConstructor
 public class UserController {

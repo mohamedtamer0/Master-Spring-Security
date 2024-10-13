@@ -10,7 +10,8 @@ import lombok.Setter;
 import java.sql.Date;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Table(name = "loans")
 public class Loans {
 
